@@ -178,6 +178,7 @@ button,input{font:inherit}
   }
   .hero-meta{margin-top:0;margin-bottom:14px;font-size:12px;letter-spacing:.14em}
   .hero-cta{margin-top:22px;padding:15px 20px;font-size:11px;min-height:48px}
+  .scroll-cue{bottom:10px}
 }
 @media(max-width:340px){
   .hero h1{font-size:44px}
@@ -231,46 +232,26 @@ button,input{font:inherit}
 @media(max-width:900px){.info-grid{grid-template-columns:1fr 1fr}.info-item:nth-child(2){border-right:0}.info-item:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.18)}}
 @media(max-width:560px){.info-grid{grid-template-columns:1fr}.info-item{border-right:0;border-bottom:1px solid rgba(255,255,255,.18)}}
 
-/* ---------- home visit panel ---------- */
-.visit-panel-section{padding:clamp(72px,10vw,116px) 0}
-.visit-panel{
-  position:relative;max-width:720px;margin:0 auto;text-align:center;overflow:hidden;
-  background:linear-gradient(150deg,var(--burgundy-soft),var(--burgundy));
-  border-radius:clamp(20px,4vw,28px);
-  padding:clamp(48px,7vw,76px) clamp(28px,7vw,64px);
-  box-shadow:0 28px 60px rgba(20,4,6,.28),0 1px 0 rgba(255,255,255,.06) inset;
-  transition:box-shadow .4s var(--ease)
-}
-.visit-panel:before{
-  content:"";position:absolute;inset:0;border-radius:inherit;background:rgba(255,255,255,0);
-  transition:background .4s ease;pointer-events:none
-}
-.visit-panel:hover{box-shadow:0 34px 74px rgba(20,4,6,.34),0 1px 0 rgba(255,255,255,.08) inset}
-.visit-panel:hover:before{background:rgba(255,255,255,.04)}
-.visit-panel-dates{
+/* ---------- home visit info (plain typography, no card) ---------- */
+.visit-info{padding:clamp(64px,9vw,100px) 0;text-align:center}
+.visit-info-dates{
   position:relative;margin:0;font-family:var(--serif);font-weight:400;color:#fff;
-  font-size:clamp(30px,4.2vw,42px);letter-spacing:-.01em
+  font-size:clamp(40px,5.6vw,64px);letter-spacing:-.01em;line-height:1.05
 }
-.visit-panel-dates span{
-  display:block;margin-top:12px;font-family:var(--sans);font-size:11px;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;color:#f1c7ca
+.visit-info-dates span{
+  display:block;margin-top:14px;font-family:var(--sans);font-size:12px;font-weight:700;
+  letter-spacing:.22em;text-transform:uppercase;color:#f1c7ca
 }
-.visit-panel-address{
-  position:relative;margin:24px 0 0;font-size:16px;line-height:1.55;color:rgba(255,255,255,.82)
+.visit-info-address{position:relative;margin:30px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78)}
+.visit-info-link{
+  position:relative;display:inline-flex;align-items:center;gap:6px;margin-top:30px;
+  font-size:15px;font-weight:600;color:rgba(255,255,255,.92);
+  transition:color .25s ease,transform .15s ease
 }
-.visit-panel-cta{
-  position:relative;display:inline-flex;align-items:center;gap:12px;margin-top:32px;
-  background:#fff;color:var(--burgundy-dark);border-radius:999px;
-  padding:16px 30px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  box-shadow:0 10px 26px rgba(0,0,0,.16);
-  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s var(--ease)
-}
-.visit-panel-cta:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.2)}
-.visit-panel-cta:active{transform:scale(.97);transition-duration:.12s}
-@media(max-width:600px){
-  .visit-panel-address{font-size:15px}
-  .visit-panel-cta{width:100%;justify-content:center;padding:16px 22px}
-}
+.visit-info-link span{display:inline-block;transition:transform .3s var(--ease)}
+.visit-info-link:hover{color:#fff}
+.visit-info-link:hover span{transform:translateX(5px)}
+.visit-info-link:active{transform:scale(.98);transition-duration:.1s}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:16px;border:1px solid currentColor;padding:15px 22px;background:transparent;
@@ -279,7 +260,7 @@ button,input{font:inherit}
 }
 .btn:hover{transform:translateY(-2px);background:var(--burgundy);color:#fff;border-color:var(--burgundy);box-shadow:0 10px 24px rgba(69,16,21,.16)}
 .section-burgundy .btn:hover{background:#fff;color:var(--burgundy);border-color:#fff;box-shadow:0 10px 24px rgba(0,0,0,.18)}
-.btn:active,.hero-cta:active,.mobile-nav-ticket:active,.visit-panel-cta:active,.schedule-tab:active{
+.btn:active,.hero-cta:active,.mobile-nav-ticket:active,.schedule-tab:active{
   transform:scale(.97);transition-duration:.12s
 }
 @media(max-width:767px){.btn{min-height:48px;width:100%;max-width:320px}}
