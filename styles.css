@@ -178,7 +178,7 @@ button,input{font:inherit}
   }
   .hero-meta{margin-top:0;margin-bottom:14px;font-size:12px;letter-spacing:.14em}
   .hero-cta{margin-top:22px;padding:15px 20px;font-size:11px;min-height:48px}
-  .scroll-cue{bottom:10px}
+  .scroll-cue{bottom:0}
 }
 @media(max-width:340px){
   .hero h1{font-size:44px}
