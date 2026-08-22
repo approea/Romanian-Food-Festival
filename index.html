@@ -33,18 +33,33 @@
 </header>
 <nav class="mobile-nav" aria-label="Mobile navigation">
   <button class="mobile-nav-close" type="button" aria-label="Close menu">Close</button>
-  <a href="festival.html">Festival</a>
-  <a href="food.html">Food</a>
-  <a href="culture.html">Culture</a>
-  <a href="program.html">Program</a>
-  <a href="visit.html">Visit</a>
-  <a href="tickets.html">Tickets</a>
+  <div class="mobile-nav-motif" aria-hidden="true">
+<svg viewBox="0 0 600 600" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="18">
+    <path d="M300 54v492M54 300h492"/>
+    <path d="M300 74c-45 52-62 96-60 140 3 63 32 93 60 120 28-27 57-57 60-120 2-44-15-88-60-140Z"/>
+    <path d="M300 526c45-52 62-96 60-140-3-63-32-93-60-120-28 27-57 57-60 120-2 44 15 88 60 140Z"/>
+    <path d="M74 300c52-45 96-62 140-60 63 3 93 32 120 60-27 28-57 57-120 60-44 2-88-15-140-60Z"/>
+    <path d="M526 300c-52 45-96 62-140 60-63-3-93-32-120-60 27-28 57-57 120-60 44-2 88 15 140 60Z"/>
+    <path d="M180 180l240 240M420 180 180 420"/>
+    <rect x="258" y="258" width="84" height="84" transform="rotate(45 300 300)"/>
+  </g>
+</svg>
+</div>
+  <div class="mobile-nav-links">
+    <a href="festival.html">Festival</a>
+    <a href="food.html">Food</a>
+    <a href="culture.html">Culture</a>
+    <a href="program.html">Program</a>
+    <a href="visit.html">Visit</a>
+  </div>
+  <a class="mobile-nav-ticket" href="tickets.html">Tickets <span>→</span></a>
 </nav>
 
 
 <main>
   <section class="hero" aria-label="Romanian Food Festival hero">
-    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="">
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg">
       <source src="assets/hero.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
@@ -85,6 +100,17 @@
         <div class="info-item"><div class="info-label">Location</div><div class="info-sub">Dallas, Texas<br><span style="opacity:.7">Venue details on Visit page</span></div></div>
         <div class="info-item"><div class="info-label">Hosted by</div><div class="info-value">Romanian<br>Community</div></div>
       </div>
+      <div class="info-mobile reveal">
+        <div class="info-mobile-dates"><span class="info-mobile-days">23—25</span><span class="info-mobile-month">October 2026</span></div>
+        <div class="info-mobile-rule"></div>
+        <div class="info-mobile-day"><div class="info-mobile-day-name">Friday</div><div class="info-mobile-day-time">4:00 PM – 9:00 PM</div></div>
+        <div class="info-mobile-rule"></div>
+        <div class="info-mobile-day"><div class="info-mobile-day-name">Saturday</div><div class="info-mobile-day-time">11:00 AM – 9:00 PM</div></div>
+        <div class="info-mobile-rule"></div>
+        <div class="info-mobile-day"><div class="info-mobile-day-name">Sunday</div><div class="info-mobile-day-time">11:00 AM – 7:00 PM</div></div>
+        <div class="info-mobile-rule"></div>
+        <div class="info-mobile-location">Dallas, Texas</div>
+      </div>
       <div style="text-align:center;margin-top:42px"><a class="btn reveal" href="visit.html">Plan your visit →</a></div>
     </div>
   </section>
@@ -110,7 +136,7 @@
       <div>
         <p class="footer-title">Explore</p>
         <div class="footer-links">
-          <a href="festival.html">Festival</a><a href="food.html">Food</a><a href="culture.html">Culture</a><a href="program.html">Program</a>
+          <a href="festival.html">Festival</a><a href="food.html">Food</a><a href="culture.html">Culture</a><a href="program.html">Program</a><a href="visit.html">Visit</a><a href="tickets.html">Tickets</a>
         </div>
       </div>
       <div>
