@@ -98,7 +98,7 @@
     if (heroVideo) {
       if (window.matchMedia('(max-width:767px)').matches) {
         const source = heroVideo.querySelector('source');
-        if (source) source.src = 'assets/hero-mobile.mp4';
+        if (source) source.setAttribute('src', source.getAttribute('src').replace('hero.mp4', 'hero-mobile.mp4'));
         heroVideo.load();
       }
       heroVideo.muted = true;
@@ -152,5 +152,21 @@
         setTimeout(() => btn.textContent = '→', 1200);
       });
     }
+  } catch (e) {}
+
+  try {
+    document.querySelectorAll('.simple-form').forEach(form => {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        if (form.checkValidity && !form.checkValidity()) { form.reportValidity(); return; }
+        const btn = form.querySelector('button[type="submit"]');
+        if (!btn) return;
+        const original = btn.textContent;
+        btn.textContent = 'Thank you ✓';
+        btn.disabled = true;
+        form.reset();
+        setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 3200);
+      });
+    });
   } catch (e) {}
 })();

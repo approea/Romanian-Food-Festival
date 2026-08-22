@@ -84,6 +84,8 @@ button,input{font:inherit}
 .nav a:hover:after,.nav a.active:after{transform:scaleX(1);transform-origin:left}
 .ticket-link{border:1px solid currentColor;padding:12px 22px!important}
 .ticket-link:after{display:none!important}
+.lang-link{opacity:.55;transition:opacity .25s ease}
+.lang-link:hover{opacity:1}
 .mobile-menu-btn{display:none;background:none;border:0;color:inherit;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:8px 0}
 @media(max-width:980px){
   .nav{display:none}.mobile-menu-btn{display:block}
@@ -129,6 +131,21 @@ button,input{font:inherit}
 .mobile-nav-links a:nth-child(4){transition-delay:.26s}
 .mobile-nav-links a:nth-child(5){transition-delay:.32s}
 .mobile-nav.open .mobile-nav-ticket{transition-delay:.38s}
+.mobile-nav-lang{
+  position:relative;z-index:1;margin-top:20px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(255,255,255,.55);opacity:0;transform:translateY(14px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease),color .25s ease
+}
+.mobile-nav-lang:hover{color:#fff}
+.mobile-nav.open .mobile-nav-lang{opacity:1;transform:none;transition-delay:.42s}
+.mobile-nav-secondary{
+  position:relative;z-index:1;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 16px;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .5s var(--ease),transform .5s var(--ease)
+}
+.mobile-nav-secondary a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color .25s ease}
+.mobile-nav-secondary a:hover{color:#fff}
+.mobile-nav.open .mobile-nav-secondary{opacity:1;transform:none;transition-delay:.46s}
 .mobile-nav-close{position:absolute;top:calc((var(--header-h) - 18px) / 2);right:var(--pad-x-mobile);background:none;border:0;color:#fff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;z-index:2}
 
 /* ---------- hero ---------- */
@@ -252,15 +269,69 @@ button,input{font:inherit}
   letter-spacing:.22em;text-transform:uppercase;color:#f1c7ca
 }
 .visit-info-address{position:relative;margin:30px 0 0;font-size:16px;line-height:1.6;color:rgba(255,255,255,.78)}
-.visit-info-link{
-  position:relative;display:inline-flex;align-items:center;gap:6px;margin-top:30px;
-  font-size:15px;font-weight:600;color:rgba(255,255,255,.92);
-  transition:color .25s ease,transform .15s ease
+
+/* ---------- reusable quiet arrow link ---------- */
+.arrow-link{
+  position:relative;display:inline-flex;align-items:center;gap:6px;
+  font-size:15px;font-weight:600;color:var(--burgundy);
+  transition:color .25s ease,opacity .25s ease,transform .15s ease
 }
-.visit-info-link span{display:inline-block;transition:transform .3s var(--ease)}
-.visit-info-link:hover{color:#fff}
-.visit-info-link:hover span{transform:translateX(5px)}
-.visit-info-link:active{transform:scale(.98);transition-duration:.1s}
+.arrow-link span{display:inline-block;transition:transform .3s var(--ease)}
+.arrow-link:hover{color:var(--burgundy-dark)}
+.arrow-link:hover span{transform:translateX(5px)}
+.arrow-link:active{transform:scale(.98);transition-duration:.1s}
+.section-burgundy .arrow-link,.visit-info-link{color:rgba(255,255,255,.92)}
+.section-burgundy .arrow-link:hover,.visit-info-link:hover{color:#fff}
+.visit-info-link{margin-top:30px}
+
+/* ---------- inline stat line / welcome note ---------- */
+.stat-line{margin:22px 0 0;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy)}
+.welcome-note{margin:22px auto 0;max-width:520px;font-size:14px;line-height:1.6;color:var(--muted);font-style:italic}
+
+/* ---------- get involved links ---------- */
+.get-involved-links{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+
+/* ---------- parking / address blocks ---------- */
+.parking-list{border-top:1px solid var(--line)}
+.parking-item{
+  display:block;padding:26px 18px;border-bottom:1px solid var(--line);border-radius:10px;
+  transition:background .3s ease,transform .3s var(--ease)
+}
+.parking-item:hover{background:rgba(117,25,34,.04)}
+.parking-item:active{transform:scale(.99);transition-duration:.1s}
+.parking-item-label{font-size:11px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--burgundy);margin-bottom:8px}
+.parking-item h3{margin:0 0 6px;font-family:var(--serif);font-size:24px;font-weight:400}
+.parking-item p{margin:0 0 14px;color:var(--muted)}
+.parking-item:hover .arrow-link{color:var(--burgundy-dark)}
+.parking-item:hover .arrow-link span{transform:translateX(5px)}
+
+/* ---------- simple forms ---------- */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+.form-grid .form-field.full{grid-column:1/-1}
+.form-field label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.form-field input,.form-field textarea{
+  width:100%;border:0;border-bottom:1px solid var(--line);background:transparent;padding:10px 2px;
+  font-family:var(--sans);font-size:16px;color:var(--ink);transition:border-color .3s ease;outline:none
+}
+.form-field textarea{resize:vertical;min-height:100px}
+.form-field input:focus,.form-field textarea:focus{border-color:var(--burgundy)}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+
+/* ---------- sponsor wordmark row ---------- */
+.sponsor-row{display:flex;flex-wrap:wrap;gap:48px 64px;align-items:center;justify-content:center;margin-top:44px}
+.sponsor-name{font-family:var(--serif);font-size:26px;color:var(--ink);opacity:.72;transition:opacity .3s ease}
+.sponsor-name:hover{opacity:1}
+.sponsor-name small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* ---------- schedule extras ---------- */
+.schedule-row{align-items:start}
+.schedule-note{margin-top:4px;font-size:13px;font-style:italic;color:var(--muted)}
+.schedule-notice{margin-top:28px;font-size:12px;color:var(--muted);font-style:italic}
+
+/* ---------- footer legal row ---------- */
+.footer-legal{display:flex;gap:22px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,.56)}
+.footer-legal a{transition:color .25s ease}
+.footer-legal a:hover{color:#fff}
 
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:16px;border:1px solid currentColor;padding:15px 22px;background:transparent;
@@ -329,6 +400,16 @@ button,input{font:inherit}
 .menu-row{display:grid;grid-template-columns:1.1fr 1.9fr;gap:30px;padding:26px 0;border-bottom:1px solid var(--line)}
 .menu-row h3{margin:0;font-family:var(--serif);font-size:28px;font-weight:400}
 .menu-row p{margin:0;color:var(--muted)}
+.order-row{
+  display:flex;align-items:center;justify-content:space-between;padding:24px 2px;
+  border-bottom:1px solid var(--line);font-family:var(--serif);font-size:24px;font-weight:400;
+  color:var(--ink);transition:color .25s ease,transform .15s ease
+}
+.order-row .order-arrow{font-family:var(--sans);font-size:14px;transition:transform .3s var(--ease)}
+.order-row:hover{color:var(--burgundy)}
+.order-row:hover .order-arrow{transform:translateX(5px)}
+.order-row:active{transform:scale(.99);transition-duration:.1s}
+@media(max-width:600px){.order-row{font-size:20px;padding:20px 0}}
 @media(max-width:680px){
   .menu-row{grid-template-columns:1fr;gap:6px;padding:22px 0}
   .menu-row h3{font-size:26px}
