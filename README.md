@@ -74,9 +74,11 @@ ffmpeg -t 10 -i source.mp4 -an -filter_complex "[0:v]setpts=2.0*PTS,fps=30000/10
 instead of the 1920 scale; for the poster use `ffmpeg -ss 2 -i assets/video/NAME.mp4 -frames:v 1 -q:v 4 assets/video/NAME-poster.jpg`.
 
 ## Tickets
-The **Buy tickets** buttons (`tickets.html`, `ro/tickets.html`) open the 2026 Eventbrite event in a new tab:
-https://www.eventbrite.com/e/romanian-food-festival-dfw-2026-the-20th-anniversary-edition-tickets-1998394329234
-For next year's event, replace that URL in both files (Eventbrite → Manage events → the event → copy its link).
+The **Buy tickets** buttons (`tickets.html`, `ro/tickets.html`) open the 2026 Eventbrite event in a new tab, straight on the date and ticket picker
+(the `#tickets` at the end skips the event page's Check availability step):
+https://www.eventbrite.com/e/romanian-food-festival-dfw-2026-the-20th-anniversary-edition-tickets-1998394329234#tickets
+For next year's event, replace that URL in both files and keep `#tickets` at the end
+(Eventbrite → Manage events → the event → copy its link).
 
 ## Still to connect
 - Volunteer / vendor / contact forms and the footer email sign-up show a thank-you
