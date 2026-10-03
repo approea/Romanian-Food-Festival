@@ -73,8 +73,12 @@ ffmpeg -t 10 -i source.mp4 -an -filter_complex "[0:v]setpts=2.0*PTS,fps=30000/10
 (`offset` = slowed length − 2 × dissolve.) For the mobile file add `crop=864:1080:528:0,scale=720:900`
 instead of the 1920 scale; for the poster use `ffmpeg -ss 2 -i assets/video/NAME.mp4 -frames:v 1 -q:v 4 assets/video/NAME-poster.jpg`.
 
+## Tickets
+The **Buy tickets** buttons (`tickets.html`, `ro/tickets.html`) open the 2026 Eventbrite event in a new tab:
+https://www.eventbrite.com/e/romanian-food-festival-dfw-2026-the-20th-anniversary-edition-tickets-1998394329234
+For next year's event, replace that URL in both files (Eventbrite → Manage events → the event → copy its link).
+
 ## Still to connect
-- **Buy tickets** button (`tickets.html`, `ro/tickets.html`) — needs the ticketing link.
 - Volunteer / vendor / contact forms and the footer email sign-up show a thank-you
   message but don't send anywhere yet — they need a form service or inbox.
 
