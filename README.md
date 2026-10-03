@@ -1,39 +1,35 @@
-# Romanian Food Festival Website
+# Romanian Food Festival DFW — website
 
-## What is included
-A complete static multi-page website:
-- `index.html` — cinematic video homepage
-- `festival.html`
-- `food.html`
-- `culture.html`
-- `program.html`
-- `visit.html`
-- `tickets.html`
-- `styles.css` — complete responsive visual system
-- `app.js` — loading animation, menu, reveal animations, video motion, schedule tabs, newsletter interaction
-- `assets/` — place the final logo and hero video here
+Static multi-page site (no build step) in English, with a Romanian version in `ro/`.
 
-## Add your assets
-1. Put your logo at:
-   `assets/logo.png`
+## Pages
+| English | Romanian |
+| --- | --- |
+| `index.html` — cinematic video homepage | `ro/index.html` |
+| `festival.html` | `ro/festival.html` |
+| `food.html` | `ro/food.html` |
+| `culture.html` — includes the Alunelul and Tricolorii Veseli video sections | `ro/culture.html` |
+| `program.html` — full 2026 schedule | `ro/program.html` |
+| `visit.html` — location, live map, parking & shuttle, hours | `ro/visit.html` |
+| `tickets.html` | `ro/tickets.html` |
+| `volunteers.html`, `sponsors.html`, `vendors.html`, `contact.html`, `ordering.html` | English only (the Romanian menus link to them) |
 
-2. Put your hero video at:
-   `assets/hero.mp4`
+Shared files: `styles.css` (complete visual system) and `app.js` (loader, menu, reveal animations, videos, schedule tabs, forms).
 
-Nothing else is required visually. The design intentionally uses no photography below the hero video.
+## Brand assets (`assets/`)
+- `logo.png` / `logo.webp` — the gate logo, transparent background, 720 px wide (homepage intro).
+- `logo-sm.png` — same logo, 320 px wide (header, loader, footer).
+- `favicon.svg`, `favicon-32.png`, `icon-192.png` — the rosette mark (the carved rosette from the centre of the gate) on burgundy.
+- `apple-touch-icon.png` — full logo on paper, 180 × 180.
+- `hero.mp4`, `hero-mobile.mp4`, `hero-poster.jpg` — homepage hero video.
+- `video/` — culture-page background videos:
+  - `alunelul.mp4`, `alunelul-mobile.mp4`, `alunelul-poster.jpg`
+  - `tricolorii.mp4`, `tricolorii-mobile.mp4`, `tricolorii-poster.jpg`
 
-## Motion / animation details
-- Loading screen: logo rotates while the page loads; it fades away after content is ready.
-- Hero: video autoplays, is muted, loops and slightly scales/translates on scroll for a subtle cinematic parallax effect.
-- Hero text: main headline rises into view through an overflow mask; metadata and CTA follow with staggered fades.
-- Scroll cue: small mouse dot animates downward continuously.
-- Section content: all `.reveal` and `.line-reveal` elements fade/slide in once when entering the viewport.
-- Navigation: underline animates from left to right on hover/active page.
-- CTA buttons: lift by 2px on hover and invert to burgundy/white.
-- Mobile menu: full-screen burgundy panel slides down from above.
-- Program page: day tabs transition instantly with a short fade-up on the selected schedule.
-- Newsletter submit: arrow temporarily turns into a check mark.
-- Motion automatically disables for users with `prefers-reduced-motion`.
+The logo is an illustration with dark brown lettering, so it always sits on paper:
+over the homepage hero it hangs from the top edge as a badge, and once the header
+turns solid (or on inner pages) it settles into the bar. In the footer it sits on a
+paper tile.
 
 ## Color system
 - Paper / cream: `#FBF8F3`
@@ -44,30 +40,44 @@ Nothing else is required visually. The design intentionally uses no photography 
 - Ink: `#1D1715`
 - Neutral line: `#D8C9BD`
 
-There is intentionally no yellow/gold button or icon system.
+The logo brings its own wood browns and amber; the site keeps them inside the logo
+and uses burgundy for everything interactive. There is no yellow/gold button or icon system.
 
 ## Typography
-The design uses a premium editorial serif stack:
-`Iowan Old Style, Palatino Linotype, Book Antiqua, Palatino, Times New Roman`
-with a clean system sans-serif for navigation, labels and details.
+Editorial serif stack `Iowan Old Style, Palatino Linotype, Book Antiqua, Palatino, Times New Roman`
+for headings, with a clean system sans-serif for navigation, labels and body copy.
 
-## Important content placeholders
-Update:
-- Final venue + address
-- Host name
-- Ticket pricing and ticket links
-- Official program
-- Food menu
-- Contact info
-- Social links
+## Motion
+- Loader: the logo fades in with a thin burgundy progress line underneath, then the page fades up.
+- Hero: muted looping video with a slight scroll parallax.
+- Section content fades/slides in once when it enters the viewport.
+- Culture-page videos load only when their section scrolls into view, play muted and
+  pause off-screen. Each has a pause/play button. They never autoplay when the visitor
+  has reduced motion or data saver turned on (the poster frame shows instead).
+- All motion is disabled for `prefers-reduced-motion`.
+
+## Background videos (culture page)
+Both clips come from 60 fps stage footage. They are slowed to half speed (smooth slow
+motion at 30 fps), have no audio, and loop seamlessly: the last second dissolves into the
+first. Desktop files are 1920 × 1080; the mobile files are a 4:5 centre crop at 720 × 900.
+
+- Alunelul: first 3.1 s of the original (an audience phone enters the frame after that), 5.4 s loop.
+- Tricolorii Veseli: 0.5–10.5 s of the original, 19 s loop.
+
+The original files are kept in `_source-videos/`, which `.gitignore` keeps out of the repository.
+
+To replace a clip (example for a 60 fps source, using seconds 0–10 and a 1 s dissolve):
+```
+ffmpeg -t 10 -i source.mp4 -an -filter_complex "[0:v]setpts=2.0*PTS,fps=30000/1001,scale=1920:1080,format=yuv420p,split[a][b];[a]trim=start=1,setpts=PTS-STARTPTS[A];[b]trim=end=1,setpts=PTS-STARTPTS[B];[A][B]xfade=transition=fade:duration=1:offset=18,format=yuv420p[v]" -map "[v]" -c:v libx264 -preset slow -crf 26 -movflags +faststart assets/video/NAME.mp4
+```
+(`offset` = slowed length − 2 × dissolve.) For the mobile file add `crop=864:1080:528:0,scale=720:900`
+instead of the 1920 scale; for the poster use `ffmpeg -ss 2 -i assets/video/NAME.mp4 -frames:v 1 -q:v 4 assets/video/NAME-poster.jpg`.
+
+## Still to connect
+- **Buy tickets** button (`tickets.html`, `ro/tickets.html`) — needs the ticketing link.
+- Volunteer / vendor / contact forms and the footer email sign-up show a thank-you
+  message but don't send anywhere yet — they need a form service or inbox.
 
 ## How to open
-Open `index.html` directly in a browser, or serve the folder using any static dev server.
-
-## Design intent
-The site is deliberately simple:
-1. one cinematic hero video,
-2. large typography,
-3. alternating white and burgundy sections,
-4. a single Romanian emblem used sparingly,
-5. no unnecessary cards, galleries or decorative clutter.
+Open `index.html` directly in a browser, or serve the folder with any static server
+(for example `python3 -m http.server`).

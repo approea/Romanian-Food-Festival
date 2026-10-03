@@ -52,9 +52,9 @@
   setTimeout(hideLoader, 2400);
 
   try {
-    document.querySelectorAll('.brand img,.section-mark').forEach(img => {
+    document.querySelectorAll('.brand img,.section-mark,.section-logo').forEach(img => {
       img.addEventListener('error', () => {
-        if (img.classList.contains('section-mark')) {
+        if (img.classList.contains('section-mark') || img.classList.contains('section-logo')) {
           const f = document.createElement('div'); f.className = 'section-mark-fallback';
           img.replaceWith(f);
         } else {
@@ -121,6 +121,70 @@
         const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
         window.addEventListener('scroll', onScroll, {passive: true});
         onScroll();
+      }
+    }
+  } catch (e) {}
+
+  // Background videos inside content sections (culture page ensembles).
+  // Sources load only when the section scrolls into view, play muted, pause
+  // off-screen, and never autoplay under reduced motion or data saver.
+  try {
+    const bgVideos = [...document.querySelectorAll('video.bg-video')];
+    if (bgVideos.length) {
+      const small = window.matchMedia('(max-width:767px)').matches;
+      const conn = navigator.connection || {};
+      const autoplay = !reducedMotion && !conn.saveData;
+      const load = v => {
+        if (v.dataset.loaded) return;
+        const src = (small && v.dataset.srcMobile) || v.dataset.src;
+        if (!src) return;
+        v.src = src;
+        v.dataset.loaded = '1';
+      };
+      const start = v => {
+        if (!autoplay || v.dataset.userPaused || v.dataset.failed) return;
+        load(v);
+        v.play().catch(() => {});
+      };
+      bgVideos.forEach(v => {
+        v.muted = true;
+        v.setAttribute('playsinline', '');
+        const section = v.closest('.ensemble');
+        const btn = section && section.querySelector('.video-toggle');
+        v.addEventListener('error', () => {
+          v.dataset.failed = '1';
+          if (btn) btn.hidden = true;
+        });
+        if (!btn) return;
+        const sync = () => {
+          btn.classList.toggle('is-paused', v.paused);
+          btn.setAttribute('aria-label', v.paused
+            ? (btn.dataset.labelPlay || 'Play background video')
+            : (btn.dataset.labelPause || 'Pause background video'));
+        };
+        v.addEventListener('play', sync);
+        v.addEventListener('pause', sync);
+        btn.hidden = false;
+        sync();
+        btn.addEventListener('click', () => {
+          if (v.paused) {
+            delete v.dataset.userPaused;
+            load(v);
+            v.play().catch(() => {});
+          } else {
+            v.dataset.userPaused = '1';
+            v.pause();
+          }
+        });
+      });
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(entries => entries.forEach(entry => {
+          if (entry.isIntersecting) start(entry.target);
+          else if (!entry.target.paused) entry.target.pause();
+        }), {threshold: .2});
+        bgVideos.forEach(v => io.observe(v));
+      } else {
+        bgVideos.forEach(start);
       }
     }
   } catch (e) {}

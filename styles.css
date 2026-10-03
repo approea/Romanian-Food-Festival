@@ -47,10 +47,17 @@ button,input{font:inherit}
   transition:opacity .5s var(--ease),transform .5s var(--ease)
 }
 .loader-mark-wrap.is-active{opacity:1;transform:scale(1)}
-.loader-mark{
-  width:80px;height:80px;object-fit:contain;display:block;
-  animation:loaderSpin 1.8s linear infinite
+.loader-mark{width:150px;height:auto;display:block}
+.loader-bar{
+  display:block;position:relative;overflow:hidden;width:72px;height:2px;margin:26px auto 0;
+  border-radius:2px;background:rgba(117,25,34,.14)
 }
+.loader-bar:after{
+  content:"";position:absolute;top:0;bottom:0;left:0;width:42%;border-radius:2px;background:var(--burgundy);
+  animation:loaderBar 1.2s var(--ease) infinite
+}
+@keyframes loaderBar{from{transform:translateX(-105%)}to{transform:translateX(245%)}}
+@media(max-width:767px){.loader-mark{width:128px}}
 .loader-fallback{
   width:70px;height:70px;border:2px solid rgba(117,25,34,.18);border-top-color:var(--burgundy);
   border-radius:50%;animation:loaderSpin 1.15s linear infinite
@@ -71,9 +78,20 @@ button,input{font:inherit}
   background:rgba(251,248,243,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   color:var(--ink);border-bottom:1px solid rgba(85,62,52,.09)
 }
-.site-header .header-inner{width:min(calc(100% - 72px),1500px);margin:auto;display:flex;align-items:center;justify-content:space-between;gap:34px}
-.brand{display:flex;align-items:center;gap:16px;min-width:0}
-.brand img{width:54px;height:54px;object-fit:contain}
+.site-header .header-inner{width:min(calc(100% - 72px),1500px);height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:34px}
+/* Brand badge: the illustrated logo always sits on paper. Over the home hero it
+   hangs from the top edge like a sign; once the header turns solid (scrolled,
+   or inner pages) it settles into the bar. */
+.brand{
+  align-self:flex-start;flex:none;display:block;min-width:0;
+  padding:14px 16px 16px;border-radius:0 0 22px 22px;background-color:var(--paper-2);
+  box-shadow:0 22px 44px -22px rgba(40,12,8,.6);
+  transition:padding .5s var(--ease),box-shadow .5s var(--ease),background-color .5s var(--ease)
+}
+.brand img{display:block;width:122px;height:auto;transition:width .5s var(--ease)}
+.site-header.scrolled .brand,.site-header.inner .brand{padding:15px 0 0;background-color:transparent;box-shadow:none}
+.site-header.scrolled .brand img,.site-header.inner .brand img{width:88px}
+.brand:focus-visible{outline:2px solid var(--burgundy);outline-offset:4px}
 .brand-fallback{
   width:52px;height:52px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;
   font-family:var(--serif);font-size:18px;letter-spacing:.05em
@@ -93,7 +111,10 @@ button,input{font:inherit}
 @media(max-width:767px){
   :root{--header-h:var(--header-h-mobile)}
   .site-header .header-inner{width:min(calc(100% - var(--pad-x-mobile)*2),1500px)}
-  .brand img{width:40px;height:40px}
+  .brand{padding:10px 11px 12px;border-radius:0 0 18px 18px}
+  .brand img{width:80px}
+  .site-header.scrolled .brand,.site-header.inner .brand{padding:9px 0 0}
+  .site-header.scrolled .brand img,.site-header.inner .brand img{width:58px}
   .brand-fallback{width:38px;height:38px;font-size:14px}
 }
 
@@ -527,3 +548,107 @@ html.motion-enabled .hero .line-reveal{opacity:0;animation:heroTitleIn .8s var(-
   .reveal,.line-reveal>*{opacity:1!important;transform:none!important}
   .loader-mark-wrap{opacity:1;transform:none}
 }
+
+/* =====================================================================
+   2026 rebrand — gate logo, rosette mark, ensemble video sections
+   ===================================================================== */
+
+/* ---------- logo placements ---------- */
+.section-logo-wrap{display:block;width:min(300px,64vw);margin:0 auto 40px}
+.section-logo{display:block;width:100%;height:auto}
+.section-ornament{width:46px;height:46px;margin:0 auto 26px;color:var(--burgundy)}
+.section-ornament svg{display:block;width:100%;height:100%}
+@media(max-width:767px){
+  .section-logo-wrap{width:min(232px,62vw);margin-bottom:30px}
+  .section-ornament{width:36px;height:36px;margin-bottom:22px}
+}
+
+.footer-logo{
+  display:inline-block;margin-bottom:24px;padding:12px 14px 13px;border-radius:18px;
+  background:var(--paper-2);box-shadow:0 16px 36px -18px rgba(0,0,0,.65);
+  transition:transform .3s var(--ease)
+}
+.footer-logo:hover{transform:translateY(-2px)}
+.footer-logo:focus-visible{outline:2px solid #fff;outline-offset:4px}
+.footer-logo img{display:block;width:118px;height:auto}
+.footer-text{margin:0 0 6px;max-width:300px;color:rgba(255,255,255,.66)}
+.footer-note{margin:0 0 16px;color:rgba(255,255,255,.66)}
+.footer-mail{border-bottom:1px solid rgba(255,255,255,.3);transition:border-color .25s ease,color .25s ease}
+.footer-mail:hover{color:#fff;border-color:#fff}
+.footer-social a{transition:color .25s ease}
+.footer-social a:hover{color:#fff}
+
+/* ---------- ensemble sections with background video ---------- */
+.ensemble{
+  position:relative;isolation:isolate;overflow:hidden;color:#fff;
+  min-height:clamp(620px,96svh,980px);display:flex;align-items:flex-end;
+  background:radial-gradient(120% 90% at 80% 10%,#6a1a22 0%,var(--burgundy-deep) 55%,#2a0a0d 100%)
+}
+.ensemble + .ensemble{border-top:1px solid rgba(255,255,255,.08)}
+.ensemble-fallback{
+  position:absolute;z-index:-3;right:-6%;top:50%;width:min(56vw,760px);pointer-events:none;
+  color:rgba(255,255,255,.06);transform:translateY(-50%) rotate(-8deg)
+}
+.ensemble--right .ensemble-fallback{right:auto;left:-6%;transform:translateY(-50%) rotate(8deg)}
+.ensemble-fallback svg{display:block;width:100%;height:auto}
+.ensemble-media{position:absolute;inset:0;z-index:-2}
+.ensemble-media video{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.ensemble:after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(12,5,4,.84) 0%,rgba(12,5,4,.64) 36%,rgba(12,5,4,.2) 70%,rgba(12,5,4,.1) 100%),
+    linear-gradient(0deg,rgba(12,5,4,.55) 0%,transparent 52%)
+}
+.ensemble--right:after{
+  background:
+    linear-gradient(270deg,rgba(12,5,4,.84) 0%,rgba(12,5,4,.64) 36%,rgba(12,5,4,.2) 70%,rgba(12,5,4,.1) 100%),
+    linear-gradient(0deg,rgba(12,5,4,.55) 0%,transparent 52%)
+}
+.ensemble-inner{padding:clamp(120px,16vh,180px) 0 clamp(64px,10vh,112px)}
+.ensemble-copy{max-width:540px}
+.ensemble--right .ensemble-copy{margin-left:auto}
+.ensemble .eyebrow{color:#f1c7ca}
+.ensemble h2{margin-top:14px;color:#fff}
+.ensemble-sub{margin:12px 0 0;font-family:var(--serif);font-style:italic;font-size:clamp(22px,2.1vw,30px);line-height:1.2;color:rgba(255,255,255,.88)}
+.ensemble-lead{margin:26px 0 0;font-family:var(--serif);font-size:clamp(19px,1.45vw,22px);line-height:1.5;color:rgba(255,255,255,.95)}
+.ensemble-quote{margin-top:28px;padding-left:20px;border-left:1px solid rgba(255,255,255,.34);font-size:16px;line-height:1.7;color:rgba(255,255,255,.8)}
+.ensemble-quote p{margin:0 0 14px}
+.ensemble-quote .ensemble-credit{margin:18px 0 0;font-family:var(--serif);font-style:italic;font-size:17px;color:#fff}
+.video-toggle{
+  position:absolute;z-index:2;right:clamp(18px,3vw,44px);bottom:clamp(18px,3vw,40px);
+  width:46px;height:46px;padding:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  color:#fff;background:rgba(18,7,6,.32);border:1px solid rgba(255,255,255,.45);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:background .25s ease,border-color .25s ease
+}
+.ensemble--right .video-toggle{right:auto;left:clamp(18px,3vw,44px)}
+.video-toggle:hover{background:rgba(18,7,6,.55);border-color:#fff}
+.video-toggle:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.video-toggle svg{width:16px;height:16px;fill:currentColor}
+.video-toggle .icon-play{display:none}
+.video-toggle.is-paused .icon-play{display:block}
+.video-toggle.is-paused .icon-pause{display:none}
+.video-toggle[hidden]{display:none}
+/* Phones: the video gets its own band at the top of the section and the text
+   sits below it, so the footage is actually seen rather than buried under copy. */
+@media(max-width:767px){
+  .ensemble{display:block;min-height:0;background:#160708}
+  .ensemble:after,.ensemble--right:after{display:none}
+  .ensemble-media{position:relative;inset:auto;height:min(66svh,560px)}
+  .ensemble-media:after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(180deg,rgba(22,7,8,.2) 0%,rgba(22,7,8,0) 36%,rgba(22,7,8,.86) 86%,#160708 100%)
+  }
+  .ensemble-inner{position:relative;margin-top:-104px;padding:0 0 68px}
+  .ensemble-copy,.ensemble--right .ensemble-copy{max-width:none;margin-left:0}
+  .ensemble-fallback,.ensemble--right .ensemble-fallback{left:auto;right:-24%;top:4%;width:96vw;transform:rotate(-8deg)}
+  .video-toggle,.ensemble--right .video-toggle{left:auto;right:16px;top:16px;bottom:auto;width:42px;height:42px}
+  .ensemble-lead{font-size:18px}
+  .ensemble-quote{font-size:15.5px;padding-left:16px}
+  .footer-logo img{width:104px}
+}
+
+/* ---------- live map ---------- */
+.map-embed{position:relative;min-height:420px;background:#efe8e0;border:1px solid #e0d6cd;overflow:hidden}
+.map-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.82)}
+@media(max-width:767px){.map-embed{min-height:300px}}

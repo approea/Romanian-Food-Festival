@@ -1,0 +1,4 @@
+# Original, full-size footage. The compressed web versions live in assets/video/.
+_source-videos/
+
+.DS_Store
