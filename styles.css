@@ -79,17 +79,18 @@ button,input{font:inherit}
   color:var(--ink);border-bottom:1px solid rgba(85,62,52,.09)
 }
 .site-header .header-inner{width:min(calc(100% - 72px),1500px);height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:34px}
-/* Brand: the logo sits directly on the page, no plate. Over the home hero video it
-   gets a thin light contour so the dark lettering stays readable; once the header
-   turns solid (scrolled, or inner pages) the contour goes and it settles into the bar. */
-.brand{align-self:flex-start;flex:none;display:block;min-width:0;padding-top:14px;transition:padding .5s var(--ease)}
-.brand img{
-  display:block;width:132px;height:auto;
-  filter:drop-shadow(0 0 .6px rgba(255,249,238,.95)) drop-shadow(0 0 .6px rgba(255,249,238,.95)) drop-shadow(0 0 12px rgba(255,244,226,.28));
-  transition:width .5s var(--ease),filter .5s var(--ease)
+/* Brand: the logo sits in a white square with sharp corners. Over the home hero the
+   square is larger; once the header turns solid (scrolled, or inner pages) it
+   shrinks to fit the bar. */
+.brand{
+  align-self:flex-start;flex:none;display:grid;place-items:center;min-width:0;
+  width:128px;height:128px;margin-top:18px;background:#fff;
+  box-shadow:0 18px 40px -18px rgba(20,8,6,.6);
+  transition:width .5s var(--ease),height .5s var(--ease),margin .5s var(--ease),box-shadow .5s var(--ease)
 }
-.site-header.scrolled .brand,.site-header.inner .brand{padding-top:15px}
-.site-header.scrolled .brand img,.site-header.inner .brand img{width:88px;filter:none}
+.brand img{display:block;width:104px;height:auto;transition:width .5s var(--ease)}
+.site-header.scrolled .brand,.site-header.inner .brand{width:84px;height:84px;margin-top:12px;box-shadow:0 0 0 1px rgba(29,23,21,.08)}
+.site-header.scrolled .brand img,.site-header.inner .brand img{width:68px}
 .brand:focus-visible{outline:2px solid var(--burgundy);outline-offset:4px}
 .brand-fallback{
   width:52px;height:52px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;
@@ -110,10 +111,10 @@ button,input{font:inherit}
 @media(max-width:767px){
   :root{--header-h:var(--header-h-mobile)}
   .site-header .header-inner{width:min(calc(100% - var(--pad-x-mobile)*2),1500px)}
-  .brand{padding-top:10px}
-  .brand img{width:86px}
-  .site-header.scrolled .brand,.site-header.inner .brand{padding-top:9px}
-  .site-header.scrolled .brand img,.site-header.inner .brand img{width:58px}
+  .brand{width:84px;height:84px;margin-top:12px}
+  .brand img{width:68px}
+  .site-header.scrolled .brand,.site-header.inner .brand{width:58px;height:58px;margin-top:6px}
+  .site-header.scrolled .brand img,.site-header.inner .brand img{width:47px}
   .brand-fallback{width:38px;height:38px;font-size:14px}
 }
 
@@ -573,13 +574,13 @@ html.motion-enabled .hero .line-reveal{opacity:0;animation:heroTitleIn .8s var(-
 }
 
 .footer-logo{
-  display:inline-block;margin-bottom:24px;padding:12px 14px 13px;border-radius:18px;
-  background:var(--paper-2);box-shadow:0 16px 36px -18px rgba(0,0,0,.65);
+  display:grid;place-items:center;width:144px;height:144px;margin-bottom:24px;
+  background:#fff;box-shadow:0 16px 36px -18px rgba(0,0,0,.65);
   transition:transform .3s var(--ease)
 }
 .footer-logo:hover{transform:translateY(-2px)}
 .footer-logo:focus-visible{outline:2px solid #fff;outline-offset:4px}
-.footer-logo img{display:block;width:118px;height:auto}
+.footer-logo img{display:block;width:116px;height:auto}
 .footer-text{margin:0 0 6px;max-width:300px;color:rgba(255,255,255,.66)}
 .footer-note{margin:0 0 16px;color:rgba(255,255,255,.66)}
 .footer-mail{border-bottom:1px solid rgba(255,255,255,.3);transition:border-color .25s ease,color .25s ease}
@@ -654,6 +655,7 @@ html.motion-enabled .hero .line-reveal{opacity:0;animation:heroTitleIn .8s var(-
   .video-toggle,.ensemble--right .video-toggle{left:auto;right:16px;top:16px;bottom:auto;width:42px;height:42px}
   .ensemble-lead{font-size:18px}
   .ensemble-quote{font-size:15.5px;padding-left:16px}
+  .footer-logo{width:128px;height:128px}
   .footer-logo img{width:104px}
 }
 
