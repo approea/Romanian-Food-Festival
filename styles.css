@@ -79,18 +79,17 @@ button,input{font:inherit}
   color:var(--ink);border-bottom:1px solid rgba(85,62,52,.09)
 }
 .site-header .header-inner{width:min(calc(100% - 72px),1500px);height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:34px}
-/* Brand badge: the illustrated logo always sits on paper. Over the home hero it
-   hangs from the top edge like a sign; once the header turns solid (scrolled,
-   or inner pages) it settles into the bar. */
-.brand{
-  align-self:flex-start;flex:none;display:block;min-width:0;
-  padding:14px 16px 16px;border-radius:0 0 22px 22px;background-color:var(--paper-2);
-  box-shadow:0 22px 44px -22px rgba(40,12,8,.6);
-  transition:padding .5s var(--ease),box-shadow .5s var(--ease),background-color .5s var(--ease)
+/* Brand: the logo sits directly on the page, no plate. Over the home hero video it
+   gets a thin light contour so the dark lettering stays readable; once the header
+   turns solid (scrolled, or inner pages) the contour goes and it settles into the bar. */
+.brand{align-self:flex-start;flex:none;display:block;min-width:0;padding-top:14px;transition:padding .5s var(--ease)}
+.brand img{
+  display:block;width:132px;height:auto;
+  filter:drop-shadow(0 0 .6px rgba(255,249,238,.95)) drop-shadow(0 0 .6px rgba(255,249,238,.95)) drop-shadow(0 0 12px rgba(255,244,226,.28));
+  transition:width .5s var(--ease),filter .5s var(--ease)
 }
-.brand img{display:block;width:122px;height:auto;transition:width .5s var(--ease)}
-.site-header.scrolled .brand,.site-header.inner .brand{padding:15px 0 0;background-color:transparent;box-shadow:none}
-.site-header.scrolled .brand img,.site-header.inner .brand img{width:88px}
+.site-header.scrolled .brand,.site-header.inner .brand{padding-top:15px}
+.site-header.scrolled .brand img,.site-header.inner .brand img{width:88px;filter:none}
 .brand:focus-visible{outline:2px solid var(--burgundy);outline-offset:4px}
 .brand-fallback{
   width:52px;height:52px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;
@@ -111,9 +110,9 @@ button,input{font:inherit}
 @media(max-width:767px){
   :root{--header-h:var(--header-h-mobile)}
   .site-header .header-inner{width:min(calc(100% - var(--pad-x-mobile)*2),1500px)}
-  .brand{padding:10px 11px 12px;border-radius:0 0 18px 18px}
-  .brand img{width:80px}
-  .site-header.scrolled .brand,.site-header.inner .brand{padding:9px 0 0}
+  .brand{padding-top:10px}
+  .brand img{width:86px}
+  .site-header.scrolled .brand,.site-header.inner .brand{padding-top:9px}
   .site-header.scrolled .brand img,.site-header.inner .brand img{width:58px}
   .brand-fallback{width:38px;height:38px;font-size:14px}
 }
@@ -122,19 +121,21 @@ button,input{font:inherit}
 .mobile-nav{
   position:fixed;inset:0;z-index:90;background:var(--burgundy-deep);color:#fff;
   padding:calc(var(--header-h) + 30px) var(--pad-x-mobile) 40px;
-  display:flex;flex-direction:column;justify-content:center;gap:2px;
+  display:flex;flex-direction:column;justify-content:center;justify-content:safe center;gap:2px;
   opacity:0;visibility:hidden;transform:translateY(-16px);
   transition:opacity .5s var(--ease),transform .55s var(--ease),visibility 0s linear .55s;
-  overflow:hidden
+  overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain
 }
 .mobile-nav.open{opacity:1;visibility:visible;transform:translateY(0);transition:opacity .5s var(--ease),transform .55s var(--ease),visibility 0s}
-.mobile-nav-motif{position:absolute;right:-14%;bottom:-12%;width:min(80vw,460px);color:rgba(255,255,255,.07);pointer-events:none;
-  transform:scale(.96) rotate(-3deg);transition:transform .8s var(--ease) .05s}
-.mobile-nav.open .mobile-nav-motif{transform:scale(1) rotate(0)}
-.mobile-nav-motif svg{width:100%;height:auto;display:block}
+.mobile-nav-motif{position:absolute;inset:0;overflow:hidden;color:rgba(255,255,255,.07);pointer-events:none}
+.mobile-nav-motif svg{
+  position:absolute;right:-14%;bottom:-12%;width:min(80vw,460px);height:auto;display:block;
+  transform:scale(.96) rotate(-3deg);transition:transform .8s var(--ease) .05s
+}
+.mobile-nav.open .mobile-nav-motif svg{transform:scale(1) rotate(0)}
 .mobile-nav-links{display:flex;flex-direction:column;position:relative;z-index:1}
 .mobile-nav-links a{
-  font-family:var(--serif);font-size:clamp(30px,8.4vw,36px);font-weight:400;padding:9px 0;
+  font-family:var(--serif);font-size:clamp(30px,8.4vw,36px);line-height:1.2;font-weight:400;padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.12);
   opacity:0;transform:translateY(14px);transition:opacity .5s var(--ease),transform .5s var(--ease)
 }
@@ -151,14 +152,22 @@ button,input{font:inherit}
 .mobile-nav-links a:nth-child(3){transition-delay:.2s}
 .mobile-nav-links a:nth-child(4){transition-delay:.26s}
 .mobile-nav-links a:nth-child(5){transition-delay:.32s}
-.mobile-nav.open .mobile-nav-ticket{transition-delay:.38s}
+.mobile-nav-links a:nth-child(6){transition-delay:.38s}
+.mobile-nav.open .mobile-nav-ticket{transition-delay:.44s}
+@media(max-height:740px){
+  .mobile-nav-links a{font-size:clamp(26px,7.4vw,31px);padding:7px 0}
+  .mobile-nav-ticket{margin-top:18px!important;padding:14px 18px!important}
+}
+@media(max-height:600px){
+  .mobile-nav-links a{font-size:24px;padding:5px 0}
+}
 .mobile-nav-lang{
   position:relative;z-index:1;margin-top:20px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(255,255,255,.55);opacity:0;transform:translateY(14px);
   transition:opacity .5s var(--ease),transform .5s var(--ease),color .25s ease
 }
 .mobile-nav-lang:hover{color:#fff}
-.mobile-nav.open .mobile-nav-lang{opacity:1;transform:none;transition-delay:.42s}
+.mobile-nav.open .mobile-nav-lang{opacity:1;transform:none;transition-delay:.48s}
 .mobile-nav-secondary{
   position:relative;z-index:1;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 16px;
   opacity:0;transform:translateY(14px);
@@ -166,7 +175,7 @@ button,input{font:inherit}
 }
 .mobile-nav-secondary a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:color .25s ease}
 .mobile-nav-secondary a:hover{color:#fff}
-.mobile-nav.open .mobile-nav-secondary{opacity:1;transform:none;transition-delay:.46s}
+.mobile-nav.open .mobile-nav-secondary{opacity:1;transform:none;transition-delay:.52s}
 .mobile-nav-close{position:absolute;top:calc((var(--header-h) - 18px) / 2);right:var(--pad-x-mobile);background:none;border:0;color:#fff;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;z-index:2}
 
 /* ---------- hero ---------- */
@@ -596,13 +605,13 @@ html.motion-enabled .hero .line-reveal{opacity:0;animation:heroTitleIn .8s var(-
 .ensemble:after{
   content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(12,5,4,.84) 0%,rgba(12,5,4,.64) 36%,rgba(12,5,4,.2) 70%,rgba(12,5,4,.1) 100%),
-    linear-gradient(0deg,rgba(12,5,4,.55) 0%,transparent 52%)
+    linear-gradient(90deg,rgba(12,5,4,.88) 0%,rgba(12,5,4,.72) 36%,rgba(12,5,4,.26) 70%,rgba(12,5,4,.1) 100%),
+    linear-gradient(0deg,rgba(12,5,4,.6) 0%,transparent 52%)
 }
 .ensemble--right:after{
   background:
-    linear-gradient(270deg,rgba(12,5,4,.84) 0%,rgba(12,5,4,.64) 36%,rgba(12,5,4,.2) 70%,rgba(12,5,4,.1) 100%),
-    linear-gradient(0deg,rgba(12,5,4,.55) 0%,transparent 52%)
+    linear-gradient(270deg,rgba(12,5,4,.88) 0%,rgba(12,5,4,.72) 36%,rgba(12,5,4,.26) 70%,rgba(12,5,4,.1) 100%),
+    linear-gradient(0deg,rgba(12,5,4,.6) 0%,transparent 52%)
 }
 .ensemble-inner{padding:clamp(120px,16vh,180px) 0 clamp(64px,10vh,112px)}
 .ensemble-copy{max-width:540px}
