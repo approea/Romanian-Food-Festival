@@ -1,0 +1,255 @@
+/* =====================================================================
+   Digital brochure — /digitalbrochure/
+   Built on the main site's styles.css (header, hero, sections, program,
+   info grid, sponsors, video bands, footer). This file only adds what the
+   brochure needs on top: the opening "Welcome", the red page buttons,
+   the live schedule marks and the menu list.
+   ===================================================================== */
+.bro-page{
+  --bar-h:56px;
+  /* styles.css gives <body> overflow-x:hidden, which turns it into a scroll container and
+     stops position:sticky from working; clip trims sideways overflow without that side effect */
+  overflow-x:clip;
+}
+@media(max-width:767px){.bro-page{--bar-h:52px}}
+/* browsers without overflow:clip (Safari before 16): the page already clips sideways at the html level */
+@supports not (overflow:clip){.bro-page{overflow-x:visible}}
+.bro-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- site header: scrolls away; clear over the welcome film, solid on the other pages ---------- */
+.bro-page .site-header.inner{position:absolute;top:0;left:0;right:0}
+.bro-js[data-tab="welcome"] .bro-page .site-header.inner,
+html:not(.bro-js) .bro-page .site-header.inner{
+  background:transparent;color:#fff;border-bottom-color:rgba(255,255,255,.14);
+  -webkit-backdrop-filter:none;backdrop-filter:none
+}
+.bro-js[data-tab="welcome"] .bro-page .site-header.inner .brand,
+html:not(.bro-js) .bro-page .site-header.inner .brand{box-shadow:0 18px 40px -18px rgba(20,8,6,.6)}
+
+/* ---------- the five red page buttons (top, and again at the end of every page) ---------- */
+.bro-bar{position:sticky;top:0;z-index:60;margin-top:var(--header-h);background:var(--burgundy);
+  box-shadow:0 14px 30px -22px rgba(40,8,12,.7);transition:transform .4s var(--ease),box-shadow .4s ease}
+/* at the end of a page the same buttons are right there, so the top ones step aside */
+.bro-bar-away .bro-bar{transform:translateY(-100%);box-shadow:none}
+.bro-tabs{display:flex;max-width:980px;margin:0 auto}
+.bro-tab{
+  flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;height:var(--bar-h);padding:0 10px;
+  color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap;
+  border-left:1px solid rgba(255,255,255,.16);transition:background .25s ease,box-shadow .25s ease
+}
+.bro-tab:first-child{border-left:0}
+.bro-tab:focus-visible{outline:2px solid #fff;outline-offset:-5px}
+@media(hover:hover){.bro-tab:hover{background:var(--burgundy-dark)}}
+.bro-tab[aria-current="page"],
+.bro-js[data-tab="welcome"] .bro-tab[data-tab="welcome"],
+.bro-js[data-tab="schedule"] .bro-tab[data-tab="schedule"],
+.bro-js[data-tab="menu"] .bro-tab[data-tab="menu"],
+.bro-js[data-tab="festival"] .bro-tab[data-tab="festival"],
+.bro-js[data-tab="about"] .bro-tab[data-tab="about"]{background:var(--burgundy-deep);box-shadow:inset 0 -3px 0 #f1c7ca}
+@media(min-width:768px){
+  .bro-tabs .bro-tab:first-child{border-left:1px solid rgba(255,255,255,.16)}
+  .bro-tabs .bro-tab:last-child{border-right:1px solid rgba(255,255,255,.16)}
+}
+@media(max-width:767px){.bro-tab{padding:0 2px;font-size:10px;letter-spacing:.07em}}
+@media(max-width:359px){.bro-tab{font-size:9px;letter-spacing:.03em}}
+
+.bro-continue{padding:72px 0 84px;background:var(--paper-2);border-top:1px solid rgba(92,65,54,.10);text-align:center}
+.bro-endbar{margin-top:24px;background:var(--burgundy)}
+@media(max-width:767px){.bro-continue{padding:56px 0 64px}.bro-endbar{margin-top:20px}}
+
+/* ---------- pages: only the chosen one is shown (all of them, one after another, without script) ---------- */
+.bro-js .bro-panel{display:none}
+.bro-js[data-tab="welcome"] #welcome,
+.bro-js[data-tab="schedule"] #schedule,
+.bro-js[data-tab="menu"] #menu,
+.bro-js[data-tab="festival"] #festival,
+.bro-js[data-tab="about"] #about{display:block}
+.bro-panel{scroll-margin-top:var(--bar-h)}
+#welcome{scroll-margin-top:calc(var(--header-h) + var(--bar-h))}
+.bro-panel [id]{scroll-margin-top:calc(var(--bar-h) + 24px)}
+.bro-panel.is-entering{animation:broFade .5s ease}
+@keyframes broFade{from{opacity:0}to{opacity:1}}
+.bro-page .bro-head.page-hero{padding:80px 0 74px}
+.bro-head .display:focus,.bro-hero-title:focus{outline:none}
+.bro-head-actions{margin-top:34px}
+@media(max-width:767px){.bro-page .bro-head.page-hero{padding:46px 0 54px}}
+
+/* the site's red button, square */
+.bro-btn-red{
+  display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:52px;padding:0 26px;
+  background:var(--burgundy);border:1px solid var(--burgundy);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s var(--ease),background .25s ease,border-color .25s ease
+}
+.bro-btn-red:hover{background:var(--burgundy-dark);border-color:var(--burgundy-dark);transform:translateY(-2px);box-shadow:0 10px 24px rgba(69,16,21,.18)}
+.bro-btn-red:active{transform:scale(.97);transition-duration:.12s}
+.bro-btn-red:focus-visible{outline:2px solid var(--burgundy);outline-offset:3px}
+
+/* gentle fade-up as sections come into view (only once the script runs) */
+html.motion-enabled.bro-js .bro-r{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.motion-enabled.bro-js .bro-r.is-in{opacity:1;transform:none}
+
+/* ---------- welcome film (the site's .hero, tucked under the header and the buttons) ---------- */
+.bro-hero.hero{margin-top:calc(-1 * (var(--header-h) + var(--bar-h)))}
+.bro-hero-media{position:absolute;inset:0;z-index:0;overflow:hidden;background:#150f0e}
+.bro-hero-poster,.bro-hero-poster img,.bro-hero-video{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center 45%}
+.bro-hero-video{opacity:0;transition:opacity 1.1s ease}
+.bro-hero-video.is-playing{opacity:1}
+.bro-hero .hero-content{padding-top:calc(var(--header-h) + var(--bar-h) + 40px)}
+.bro-hero-title{
+  margin:0;max-width:770px;font-family:var(--serif);font-weight:400;color:#fff;
+  font-size:clamp(68px,7.2vw,132px);line-height:.86;letter-spacing:-.045em;text-wrap:balance
+}
+.bro-hero-place{margin:12px 0 0;font-size:14px;line-height:1.5;color:rgba(255,255,255,.8)}
+.bro-hero-place span,.bro-hero .hero-meta span{white-space:nowrap}
+@media(max-height:820px) and (min-width:768px){.bro-hero-title{font-size:clamp(58px,6vw,96px)}}
+@media(max-width:767px){
+  .bro-hero-poster,.bro-hero-poster img,.bro-hero-video{object-position:center 40%}
+  .bro-hero-title{font-size:clamp(48px,14vw,68px);line-height:.9;max-width:100%}
+  .bro-hero .hero-content>.bro-hero-place{order:3;margin-top:14px;font-size:13px}
+  .bro-hero-place .bro-sep{display:block;height:0;overflow:hidden}
+}
+@media(max-width:340px){.bro-hero-title{font-size:44px}}
+
+/* ---------- opening "Welcome": the same film, full screen, before the page appears ---------- */
+.bro-intro{display:none}
+html.bro-intro-on{overflow:hidden}
+.bro-intro-on .bro-intro{
+  position:fixed;inset:0;z-index:120;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;text-align:center;color:#fff;cursor:pointer;touch-action:none;-webkit-tap-highlight-color:transparent;
+  background:radial-gradient(120% 90% at 50% 46%,rgba(8,5,4,.34) 0%,rgba(8,5,4,.62) 58%,rgba(8,5,4,.86) 100%)
+}
+/* while it plays: the film fills the screen, everything else waits */
+.bro-intro-on:not(.bro-intro-out) .bro-hero.hero{height:100vh;height:100svh;min-height:100svh;max-height:none}
+.bro-intro-on:not(.bro-intro-out) .site-header,
+.bro-intro-on:not(.bro-intro-out) .bro-bar,
+.bro-intro-on:not(.bro-intro-out) .bro-hero .hero-content,
+.bro-intro-on:not(.bro-intro-out) .bro-hero .hero-overlay,
+.bro-intro-on:not(.bro-intro-out) .bro-hero .scroll-cue{opacity:0;visibility:hidden}
+.bro-intro-inner{display:flex;flex-direction:column;align-items:center}
+.bro-intro-logo{display:block;width:clamp(150px,30vw,250px);opacity:0;transform:translateY(10px) scale(.96);animation:broIn 1.1s .15s var(--ease) forwards}
+.bro-intro-logo img{display:block;width:100%;height:auto}
+.bro-intro-word{margin:clamp(16px,3vh,30px) 0 0;overflow:hidden;padding:0 .05em .1em;
+  font-family:var(--serif);font-weight:400;font-size:clamp(72px,17vw,156px);line-height:.95;letter-spacing:-.045em}
+.bro-intro-word span{display:block;transform:translateY(125%);animation:broRise 1.1s .55s var(--ease) forwards}
+.bro-intro-rule{display:block;width:56px;height:1px;margin:20px auto 0;background:rgba(255,255,255,.6);transform:scaleX(0);animation:broDraw .9s 1.05s var(--ease) forwards}
+.bro-intro-sub{margin:18px 0 0;font-family:var(--serif);font-size:clamp(19px,2.4vw,24px);line-height:1.3;opacity:0;animation:broIn .9s 1.2s var(--ease) forwards}
+.bro-intro-meta{margin:12px 0 0;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.78);opacity:0;animation:broIn .9s 1.4s var(--ease) forwards}
+.bro-intro-hint{position:absolute;left:0;right:0;bottom:max(30px,env(safe-area-inset-bottom));margin:0;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.52);opacity:0;animation:broIn .8s 1.9s var(--ease) forwards}
+.bro-hint-mouse{display:none}
+@media(hover:hover) and (pointer:fine){.bro-hint-touch{display:none}.bro-hint-mouse{display:inline}}
+@media(max-height:560px){
+  .bro-intro-logo{width:clamp(90px,24vh,150px)}
+  .bro-intro-word{margin-top:10px;font-size:clamp(48px,17vh,96px)}
+  .bro-intro-hint{bottom:14px}
+}
+@keyframes broIn{to{opacity:1;transform:none}}
+@keyframes broRise{to{transform:none}}
+@keyframes broDraw{to{transform:scaleX(1)}}
+/* leaving: the words lift and fade, the page settles in around the film */
+.bro-intro-out .bro-intro{opacity:0;pointer-events:none;transition:opacity .9s var(--ease)}
+.bro-intro-out .bro-intro-inner{opacity:0;transform:translateY(-16px);transition:opacity .4s ease,transform .7s var(--ease)}
+.bro-intro-out .site-header,
+.bro-intro-out .bro-bar,
+.bro-intro-out .bro-hero .hero-content,
+.bro-intro-out .bro-hero .hero-overlay,
+.bro-intro-out .bro-hero .scroll-cue{transition:opacity .8s var(--ease) .3s}
+.bro-intro-out .bro-hero.hero{transition:height .9s var(--ease)}
+
+/* ---------- "today at the festival" band (the home page's dates band) ---------- */
+.bro-live[hidden],.bro-live-link[hidden]{display:none}
+.bro-live .eyebrow{position:relative}
+.bro-live .visit-info-dates{margin-top:16px}
+.bro-live-title{position:relative;margin:16px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,56px);line-height:1.05;letter-spacing:-.01em;color:#fff}
+.bro-live-rows{position:relative;display:grid;grid-template-columns:1fr 1fr;max-width:920px;margin:32px auto 0;
+  border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18);text-align:left}
+.bro-live-rows.is-single{grid-template-columns:1fr;max-width:560px;text-align:center}
+.bro-now{padding:26px 28px}
+.bro-now+.bro-now{border-left:1px solid rgba(255,255,255,.18)}
+.bro-now-label{margin:0;font-size:10px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:#f1c7ca}
+.bro-now-label.is-live::before{content:"";display:inline-block;width:7px;height:7px;margin-right:9px;border-radius:50%;background:#fff;vertical-align:1px;animation:broPulse 1.8s ease-out infinite}
+.bro-now-time{margin:10px 0 0;font-family:var(--serif);font-size:30px;line-height:1.1;color:#fff}
+.bro-now-title{margin:6px 0 0;font-size:16px;line-height:1.5;color:rgba(255,255,255,.86)}
+.bro-live-note{position:relative;margin:18px auto 0;max-width:620px;font-size:16px;line-height:1.6;color:rgba(255,255,255,.8)}
+@keyframes broPulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.65)}70%{box-shadow:0 0 0 8px rgba(255,255,255,0)}100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}}
+@media(max-width:700px){
+  .bro-live-rows{grid-template-columns:1fr}
+  .bro-now{padding:22px 4px}
+  .bro-now+.bro-now{border-left:0;border-top:1px solid rgba(255,255,255,.18)}
+  .bro-now-time{font-size:26px}
+}
+
+/* ---------- welcome text, info grid ---------- */
+.bro-prose.prose{margin:26px auto 0;max-width:720px;font-size:17px;line-height:1.75}
+@media(max-width:767px){.bro-prose.prose{text-align:left;font-size:16px;line-height:1.7}}
+.bro-page .info-sub a{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:3px;transition:text-decoration-color .2s ease}
+.bro-page .info-sub a:hover{text-decoration-color:#fff}
+.bro-page .section-burgundy .info-grid{position:relative;margin-top:28px}
+.bro-page .section-burgundy .eyebrow{position:relative}
+
+/* ---------- schedule (the site's program, plus "now / next" during the festival) ---------- */
+.bro-day-title{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.bro-page .schedule-row{position:relative}
+.bro-js .schedule-panel.active .schedule-row{animation:fadeUp .5s var(--ease) both;animation-delay:calc(var(--i,0) * 35ms)}
+.schedule-row.is-now{background:linear-gradient(90deg,rgba(117,25,34,.07),rgba(117,25,34,0) 75%)}
+.schedule-row.is-now::before{content:"";position:absolute;left:-14px;top:14px;bottom:14px;width:2px;background:var(--burgundy)}
+.bro-flag{display:block;margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy)}
+.is-now .bro-flag::before{content:"";display:inline-block;width:6px;height:6px;margin-right:8px;border-radius:50%;background:var(--burgundy);vertical-align:1px}
+.schedule-tab .tab-today{display:inline-block;margin-left:8px;padding:2px 6px;background:#f1c7ca;color:var(--burgundy-deep);font-size:9px;letter-spacing:.12em}
+@media(max-width:680px){.schedule-tab .tab-today{margin:4px 0 0}}
+
+/* ---------- menu ---------- */
+.bro-menu{columns:2;column-gap:88px}
+.bro-menu-cat{break-inside:avoid;margin:0 0 60px}
+.bro-menu-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0;padding-bottom:16px;
+  border-bottom:1px solid rgba(117,25,34,.35);font-family:var(--serif);font-weight:400;font-size:32px;line-height:1.1;letter-spacing:-.01em}
+.bro-menu-title span{font-style:italic;font-size:17px;letter-spacing:0;color:var(--muted)}
+.bro-menu-list{list-style:none;margin:0;padding:0}
+.bro-mi{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.bro-mi p{margin:0}
+.bro-mi-name{font-size:16px;line-height:1.45;color:var(--ink)}
+.bro-mi-tag{margin-left:10px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--burgundy);white-space:nowrap}
+.bro-mi .bro-mi-ro{margin-top:3px;font-family:var(--serif);font-style:italic;font-size:15.5px;color:var(--muted)}
+.bro-mi .bro-mi-desc{margin-top:5px;font-size:14px;line-height:1.55;color:var(--muted)}
+.bro-mi-price{font-family:var(--serif);font-size:22px;color:var(--burgundy);white-space:nowrap}
+.bro-menu + .schedule-notice{margin-top:0}
+@media(max-width:860px){.bro-menu{columns:1}.bro-menu-cat{margin-bottom:48px}}
+@media(max-width:767px){.bro-menu-title{font-size:28px}}
+
+/* ---------- festival & church: six / three points on burgundy ---------- */
+.bro-page .section-burgundy .feature-list{position:relative;margin-top:28px;border-color:rgba(255,255,255,.18)}
+.bro-page .section-burgundy .feature{border-color:rgba(255,255,255,.18)}
+.bro-page .section-burgundy .feature-num{color:#fff}
+.bro-page .section-burgundy .feature p{color:rgba(255,255,255,.74)}
+.bro-features .feature:nth-child(3n){border-right:0}
+.bro-features .feature:nth-child(n+4){border-top:1px solid rgba(255,255,255,.18)}
+.bro-features .feature-num{font-size:44px}
+.bro-services .feature-num{font-size:clamp(34px,3.4vw,46px)}
+@media(max-width:760px){
+  .bro-page .section-burgundy .feature{border-right:0;border-top:0}
+  .bro-page .section-burgundy .feature:last-child{border-bottom:0}
+  .bro-features .feature-num{font-size:40px}
+}
+
+/* ---------- video bands (the site's .ensemble) ---------- */
+.bro-ensemble-link{position:relative;margin:26px 0 0}
+.bro-page .ensemble .arrow-link{color:#fff}
+
+/* ---------- about ---------- */
+.bro-page .prose .bro-signature{margin-top:6px;font-family:var(--serif);font-style:italic;font-size:20px;color:var(--burgundy)}
+.bro-quote{margin:34px 0 0;padding-left:22px;border-left:1px solid var(--burgundy)}
+.bro-page .bro-quote p{margin:0;font-family:var(--serif);font-size:clamp(24px,2.3vw,30px);line-height:1.25;letter-spacing:-.01em;color:var(--ink)}
+.bro-quote cite{display:block;margin-top:10px;font-style:normal;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.bro-places-title{margin-top:34px}
+.bro-places{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--line)}
+.bro-places li{padding:18px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:22px;color:var(--ink)}
+@media(max-width:767px){.bro-places li{font-size:20px;padding:16px 0}}
+
+/* ---------- reduced motion: the site turns animations off; make sure nothing waits on them ---------- */
+@media(prefers-reduced-motion:reduce){
+  .bro-intro-logo,.bro-intro-sub,.bro-intro-meta,.bro-intro-hint{opacity:1;transform:none}
+  .bro-intro-word span,.bro-intro-rule{transform:none}
+  .bro-hero-video{transition:none}
+  html.motion-enabled.bro-js .bro-r{opacity:1;transform:none}
+}

@@ -93,24 +93,29 @@ The festival QR codes point to https://www.romanianfeast.com/digitalbrochure, th
 Webflow site used, so **don't rename or move the `digitalbrochure/` folder**. GitHub Pages serves
 `digitalbrochure/index.html` at that address (with or without the trailing slash).
 
-- Files: `digitalbrochure/index.html`, `brochure.css`, `brochure.js`, photos in `assets/brochure/` and
-  short film loops in `assets/brochure/v/`. All of them come from the 2026 festival films
-  (`RFF_2026_Deschidere_1080p.mp4` and `RFF_2026_Aftermovie_1080p.mp4`).
-- Opening: a full-screen animated "Welcome" (once per visit; tap to skip), then the brochure.
-- Pages: Welcome, Schedule, Menu, Festival, Church, Romania, Sponsors, plus Order online (the shop).
-  Only one page shows at a time. The green buttons sit at the top and again at the bottom of every
-  page; on phones a compact bar with the same buttons appears once you scroll. Each page has its own
-  address, e.g. `/digitalbrochure/#menu`, so a QR code can open a page directly.
-- Each page header plays a short, silent film loop (`v/NAME.mp4`, and `v/NAME-m.mp4` on phones) over a
-  still frame (`v/NAME.jpg`). Loops don't play with reduced motion or data saver; the still shows instead.
+- Built from the site's own pieces: the page loads `../styles.css` and `../app.js` (header, hero,
+  sections, program, info grid, video bands, sponsors, footer). `digitalbrochure/brochure.css` and
+  `digitalbrochure/brochure.js` only add what the brochure needs. The header, footer and sponsors are
+  copies of the home page's, so when those change on the home page, change them here too.
+- Opening: a full-screen "Welcome" with the white logo over the festival film (once per visit; tap to
+  skip), then the Welcome page.
+- Pages: Welcome, Schedule, Menu, Festival, About. Only one page shows at a time. The five red buttons
+  sit under the header, stay at the top while you scroll, and appear again at the end of every page.
+  Each page has its own address, e.g. `/digitalbrochure/#menu`, so a QR code can open a page directly.
+- Media in `digitalbrochure/media/`: `hero` (the Welcome film), `food` and `church` (video bands), each
+  with a `-mobile` version for phones and a `.jpg` still; `logo-light` is the white logo used on the
+  opening. The dance band reuses `assets/video/tricolorii*.mp4`. All films are cut from the 2026 festival
+  films (`RFF_2026_Deschidere_1080p.mp4` and `RFF_2026_Aftermovie_1080p.mp4`). They don't play with
+  reduced motion or data saver; the still shows instead.
 - During the festival (Oct 23–25, Texas time) the schedule opens on the current day and marks
-  "Happening now" and "Up next", and the Welcome page shows the same in a green card (before the
-  festival it shows a countdown). The times come from `data-start="HH:MM"` on each event, so keep
-  them in step with the text.
+  "Happening now" and "Up next", and the Welcome page shows the same right under the film (before the
+  festival it counts down the days; afterwards it says thank you). The times come from
+  `data-start="HH:MM"` on each event, so keep them in step with the text. To preview a moment, add
+  `?now=2026-10-24T14:10` to the address.
 - The menu is a copy of the online shop's menu; when prices change, update both.
-- To rebuild the film loops after changing the source films, cut 4–5 shots of about 2 s each, join them
-  with 0.35 s dissolves, end with a 0.6 s dissolve back into the first frame, and export 1280×720
-  (CRF 27) and 960×540 (CRF 28) H.264 without sound, with `-movflags +faststart`.
+- To rebuild the films: cut 4–7 shots of 1.2–2.2 s, join them with 0.35 s dissolves and end with a
+  0.6 s dissolve back into the first frame; export 1280×720 (CRF 27) and, for phones, 608×1080 (the
+  Welcome film) or 720×900 (the others) at CRF 28, H.264 without sound, with `-movflags +faststart`.
 - English only for now.
 
 ## Still to connect
