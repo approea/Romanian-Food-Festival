@@ -74,11 +74,13 @@ ffmpeg -t 10 -i source.mp4 -an -filter_complex "[0:v]setpts=2.0*PTS,fps=30000/10
 instead of the 1920 scale; for the poster use `ffmpeg -ss 2 -i assets/video/NAME.mp4 -frames:v 1 -q:v 4 assets/video/NAME-poster.jpg`.
 
 ## Tickets
-The **Buy tickets** buttons (`tickets.html`, `ro/tickets.html`) open the 2026 Eventbrite event in a new tab, straight on the date and ticket picker
-(the `#tickets` at the end skips the event page's Check availability step):
+The **Buy tickets** buttons (`tickets.html`, `ro/tickets.html`) open Eventbrite's checkout as a pop-up on
+the page (Eventbrite's embedded checkout, loaded by `app.js`), so visitors stay on the site.
+If the pop-up can't load, or the page is opened from disk instead of over https, the button is a normal
+link to the 2026 event that opens straight on the date and ticket picker (`#tickets`):
 https://www.eventbrite.com/e/romanian-food-festival-dfw-2026-the-20th-anniversary-edition-tickets-1998394329234#tickets
-For next year's event, replace that URL in both files and keep `#tickets` at the end
-(Eventbrite → Manage events → the event → copy its link).
+For next year's event, update both files: the link, plus the event ID in `id="eventbrite-widget-modal-trigger-…"`
+and `data-eventbrite-event="…"` (the number at the end of the Eventbrite link).
 
 ## Still to connect
 - Volunteer / vendor / contact forms and the footer email sign-up show a thank-you

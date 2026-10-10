@@ -233,4 +233,32 @@
       });
     });
   } catch (e) {}
+
+  // Tickets: the Buy tickets link opens Eventbrite's checkout as a pop-up on the
+  // page (Eventbrite's embedded checkout widget), so visitors stay on the site.
+  // Until the widget is ready - or if it can't load (blocked script, or a page
+  // opened from disk: Eventbrite only allows the pop-up on https) - it stays a
+  // normal link to the event on Eventbrite.
+  try {
+    const ebLink = document.querySelector('[data-eventbrite-event]');
+    if (ebLink && ebLink.id && window.location.protocol === 'https:') {
+      const ebScript = document.createElement('script');
+      ebScript.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
+      ebScript.async = true;
+      ebScript.onload = () => {
+        try {
+          window.EBWidgets.createWidget({
+            widgetType: 'checkout',
+            eventId: ebLink.dataset.eventbriteEvent,
+            modal: true,
+            modalTriggerElementId: ebLink.id
+          });
+        } catch (err) { return; }
+        // Eventbrite opens the pop-up on click but doesn't stop the link itself.
+        ebLink.addEventListener('click', e => e.preventDefault());
+        ebLink.setAttribute('aria-haspopup', 'dialog');
+      };
+      document.head.appendChild(ebScript);
+    }
+  } catch (e) {}
 })();
