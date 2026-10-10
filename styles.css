@@ -663,3 +663,26 @@ html.motion-enabled .hero .line-reveal{opacity:0;animation:heroTitleIn .8s var(-
 .map-embed{position:relative;min-height:420px;background:#efe8e0;border:1px solid #e0d6cd;overflow:hidden}
 .map-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.82)}
 @media(max-width:767px){.map-embed{min-height:300px}}
+
+/* ---------- sponsors strip (end of the homepage) ---------- */
+.home-sponsors{background:var(--paper);border-top:1px solid rgba(117,25,34,.12)}
+.home-sponsors-title{font-family:var(--serif);font-weight:400;font-size:clamp(28px,2.6vw,40px);line-height:1.15;letter-spacing:-.01em;margin:18px auto 0;max-width:760px;color:var(--ink);text-wrap:balance}
+.home-sponsors-list{list-style:none;margin:58px auto 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);max-width:1040px}
+.home-sponsor{display:flex;flex-direction:column;align-items:center;padding:6px 28px;border-left:1px solid rgba(117,25,34,.14)}
+.home-sponsor:first-child{border-left:0}
+.home-sponsor-mark{height:88px;display:flex;align-items:center;justify-content:center}
+.home-sponsor-logo{display:block;width:auto;height:40px;max-width:100%}
+.home-sponsor-logo--tall{height:82px}
+.home-sponsor-name{margin:22px 0 0;font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.home-sponsor-role{margin:7px 0 0;font-family:var(--serif);font-style:italic;font-size:15px;color:var(--burgundy)}
+.home-sponsors-cta{margin-top:50px}
+@media(max-width:767px){
+  .home-sponsors-list{grid-template-columns:1fr;margin-top:34px;max-width:340px}
+  .home-sponsor{border-left:0;border-top:1px solid rgba(117,25,34,.14);padding:26px 0}
+  .home-sponsor:first-child{border-top:0;padding-top:0}
+  .home-sponsor-mark{height:auto}
+  .home-sponsor-logo{height:36px}
+  .home-sponsor-logo--tall{height:72px}
+  .home-sponsor-name{margin-top:16px}
+  .home-sponsors-cta{margin-top:26px}
+}
