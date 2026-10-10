@@ -93,15 +93,24 @@ The festival QR codes point to https://www.romanianfeast.com/digitalbrochure, th
 Webflow site used, so **don't rename or move the `digitalbrochure/` folder**. GitHub Pages serves
 `digitalbrochure/index.html` at that address (with or without the trailing slash).
 
-- Files: `digitalbrochure/index.html`, `brochure.css`, `brochure.js` and the photos in `assets/brochure/`
-  (crops of the 2026 social-media posts). The page also uses the shared `styles.css` and `app.js`.
-- Sections: welcome, hours / entrance / parking, schedule, menu with prices, the festival, our church,
-  Romania, sponsors. The bar under the hero stays at the top of the screen and highlights the section
-  you're reading.
+- Files: `digitalbrochure/index.html`, `brochure.css`, `brochure.js`, photos in `assets/brochure/` and
+  short film loops in `assets/brochure/v/`. All of them come from the 2026 festival films
+  (`RFF_2026_Deschidere_1080p.mp4` and `RFF_2026_Aftermovie_1080p.mp4`).
+- Opening: a full-screen animated "Welcome" (once per visit; tap to skip), then the brochure.
+- Pages: Welcome, Schedule, Menu, Festival, Church, Romania, Sponsors, plus Order online (the shop).
+  Only one page shows at a time. The green buttons sit at the top and again at the bottom of every
+  page; on phones a compact bar with the same buttons appears once you scroll. Each page has its own
+  address, e.g. `/digitalbrochure/#menu`, so a QR code can open a page directly.
+- Each page header plays a short, silent film loop (`v/NAME.mp4`, and `v/NAME-m.mp4` on phones) over a
+  still frame (`v/NAME.jpg`). Loops don't play with reduced motion or data saver; the still shows instead.
 - During the festival (Oct 23–25, Texas time) the schedule opens on the current day and marks
-  "Happening now" and "Up next"; the hero shows the same two lines and links straight to them.
-  The times come from `data-start="HH:MM"` on each event, so keep those in step with the text.
+  "Happening now" and "Up next", and the Welcome page shows the same in a green card (before the
+  festival it shows a countdown). The times come from `data-start="HH:MM"` on each event, so keep
+  them in step with the text.
 - The menu is a copy of the online shop's menu; when prices change, update both.
+- To rebuild the film loops after changing the source films, cut 4–5 shots of about 2 s each, join them
+  with 0.35 s dissolves, end with a 0.6 s dissolve back into the first frame, and export 1280×720
+  (CRF 27) and 960×540 (CRF 28) H.264 without sound, with `-movflags +faststart`.
 - English only for now.
 
 ## Still to connect
