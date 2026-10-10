@@ -82,6 +82,12 @@ https://www.eventbrite.com/e/romanian-food-festival-dfw-2026-the-20th-anniversar
 For next year's event, update both files: the link, plus the event ID in `id="eventbrite-widget-modal-trigger-…"`
 and `data-eventbrite-event="…"` (the number at the end of the Eventbrite link).
 
+## Food ordering
+Every food link (Food / Mâncare in the menu, mobile menu and footer, plus the category list on the
+food pages) opens the online shop in a new tab: https://order.romanianfeast.com/s/shop
+`ordering.html` (the old "coming soon" page) redirects there; `food.html` and `ro/food.html` are kept
+but no longer linked from the menu.
+
 ## Still to connect
 - Volunteer / vendor / contact forms and the footer email sign-up show a thank-you
   message but don't send anywhere yet — they need a form service or inbox.
