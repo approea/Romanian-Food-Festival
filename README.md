@@ -88,6 +88,22 @@ food pages) opens the online shop in a new tab: https://order.romanianfeast.com/
 `ordering.html` (the old "coming soon" page) redirects there; `food.html` and `ro/food.html` are kept
 but no longer linked from the menu.
 
+## Digital brochure (`/digitalbrochure/`)
+The festival QR codes point to https://www.romanianfeast.com/digitalbrochure, the same address the old
+Webflow site used, so **don't rename or move the `digitalbrochure/` folder**. GitHub Pages serves
+`digitalbrochure/index.html` at that address (with or without the trailing slash).
+
+- Files: `digitalbrochure/index.html`, `brochure.css`, `brochure.js` and the photos in `assets/brochure/`
+  (crops of the 2026 social-media posts). The page also uses the shared `styles.css` and `app.js`.
+- Sections: welcome, hours / entrance / parking, schedule, menu with prices, the festival, our church,
+  Romania, sponsors. The bar under the hero stays at the top of the screen and highlights the section
+  you're reading.
+- During the festival (Oct 23–25, Texas time) the schedule opens on the current day and marks
+  "Happening now" and "Up next"; the hero shows the same two lines and links straight to them.
+  The times come from `data-start="HH:MM"` on each event, so keep those in step with the text.
+- The menu is a copy of the online shop's menu; when prices change, update both.
+- English only for now.
+
 ## Still to connect
 - Volunteer / vendor / contact forms and the footer email sign-up show a thank-you
   message but don't send anywhere yet — they need a form service or inbox.
