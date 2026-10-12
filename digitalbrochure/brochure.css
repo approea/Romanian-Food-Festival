@@ -232,6 +232,12 @@ html.bro-intro-on{overflow:hidden}
   .bro-features .feature-num{font-size:40px}
 }
 
+/* ---------- kids' shows (the site's .section-kids) ---------- */
+.bro-page #kids{scroll-margin-top:var(--bar-h)}
+.bro-feature-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:#fff;font-weight:600;
+  text-decoration:underline;text-decoration-color:rgba(255,255,255,.4);text-underline-offset:4px;transition:text-decoration-color .2s ease}
+.bro-feature-link:hover{text-decoration-color:#fff}
+
 /* ---------- video bands (the site's .ensemble) ---------- */
 .bro-ensemble-link{position:relative;margin:26px 0 0}
 .bro-page .ensemble .arrow-link{color:#fff}
