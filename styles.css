@@ -740,3 +740,13 @@ html.motion-enabled .hero .line-reveal{opacity:0;animation:heroTitleIn .8s var(-
   .kids-day .schedule-note{font-size:14px}
 }
 .program-kids-link .arrow-link:hover span{transform:translateY(3px)}
+
+/* ---------- Program: hourly church tours (one line above the day tabs) ---------- */
+.schedule-callout{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 18px;margin:0 0 32px;padding:18px 22px;
+  background:rgba(117,25,34,.05);border-left:3px solid var(--burgundy)}
+.schedule-callout-label{font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy);white-space:nowrap}
+.schedule-callout-text{font-family:var(--serif);font-size:20px;line-height:1.35}
+@media(max-width:767px){
+  .schedule-callout{flex-direction:column;gap:6px;margin-bottom:26px;padding:15px 18px}
+  .schedule-callout-text{font-size:18px}
+}
