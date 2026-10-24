@@ -12,6 +12,7 @@ Static multi-page site (no build step) in English, with a Romanian version in `r
 | `program.html` — full 2026 schedule | `ro/program.html` |
 | `visit.html` — location, live map, parking & shuttle, hours | `ro/visit.html` |
 | `tickets.html` | `ro/tickets.html` |
+| `donate.html` — Saint Mary's new Social Hall: video and the Square donation buttons | `ro/donate.html` |
 | `volunteers.html`, `sponsors.html`, `vendors.html`, `contact.html`, `ordering.html` | English only (the Romanian menus link to them) |
 
 Shared files: `styles.css` (complete visual system) and `app.js` (loader, menu, reveal animations, videos, schedule tabs, forms).
@@ -25,6 +26,7 @@ Shared files: `styles.css` (complete visual system) and `app.js` (loader, menu, 
 - `video/` — culture-page background videos:
   - `alunelul.mp4`, `alunelul-mobile.mp4`, `alunelul-poster.jpg`
   - `tricolorii.mp4`, `tricolorii-mobile.mp4`, `tricolorii-poster.jpg`
+  - `social-hall.mp4`, `social-hall-mobile.mp4`, `social-hall-poster.jpg` — donate page video (the poster is also on the homepage)
 
 The logo is an illustration with dark brown lettering, so it always sits on paper:
 over the homepage hero it hangs from the top edge as a badge, and once the header
